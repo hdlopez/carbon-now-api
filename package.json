@@ -1,0 +1,25 @@
+{
+  "name": "carbon-now-api",
+  "version": "1.0.0",
+  "description": "Carbon API ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hdlopez/carbon-now-api.git"
+  },
+  "author": "hdlopez@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hdlopez/carbon-now-api/issues"
+  },
+  "homepage": "https://github.com/hdlopez/carbon-now-api#readme",
+  "dependencies": {
+    "body-parser": "1.19.0",
+    "express": "4.17.1",
+    "puppeteer": "2.1.1"
+  }
+}
