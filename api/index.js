@@ -1,3 +1,6 @@
+const headlessVisit = require('../helpers/headless-visit');
+const {CARBON_URL, IMAGES_URL} = require('../helpers/globals');
+
 export default async (req, res) => {
     const { body } = req
 
@@ -14,7 +17,5 @@ export default async (req, res) => {
         IMAGES_URL
     });
 
-    res.status(201).send({
-        image_url: IMAGES_URL + 'carbon.png'
-    });
+    res.sendFile(IMAGES_URL + 'carbon.png');
 }

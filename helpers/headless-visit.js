@@ -1,9 +1,9 @@
 // Packages
-const puppeteer = require('puppeteer');
+import { launch } from 'puppeteer';
 
-module.exports = async ({url, location = './public', type = 'png', headless = false, timeout = 2000}) => {
+export default async ({url, location = './public', type = 'png', headless = false, timeout = 2000}) => {
 	// Launch browser
-	const browser = await puppeteer.launch({
+	const browser = await launch({
 		headless
 	});
 	// Open new page
