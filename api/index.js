@@ -1,4 +1,4 @@
-const headlessVisit = require('../helpers/headless-visit');
+const headlessVisit = require('../helpers/headless-visit').default;
 const {CARBON_URL, IMAGES_URL} = require('../helpers/globals');
 
 export default async (req, res) => {
