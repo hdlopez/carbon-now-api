@@ -1,7 +1,7 @@
 // Packages
 const puppeteer = require('puppeteer');
 
-module.exports = async ({url, location = './public', type = 'png', headless = true, timeout = 2000}) => {
+module.exports = async ({url, location = '/tmp', filename = 'carbon.png', type = 'png', headless = true, timeout = 2000}) => {
 	// Launch browser
 	const browser = await puppeteer.launch({ args: ['--no-sandbox'], headless: headless});
 	
@@ -27,7 +27,7 @@ module.exports = async ({url, location = './public', type = 'png', headless = tr
 		const elementBounds = await exportContainer.boundingBox();
 
 		await exportContainer.screenshot({
-			path: `${location}/carbon.png`,
+			path: `${location}/${filename}`,
 			clip: {
 				...elementBounds,
 				// This avoids a black line towards the left and bottom side of images,
@@ -73,4 +73,6 @@ module.exports = async ({url, location = './public', type = 'png', headless = tr
 	await page.waitFor(timeout);
 	// Close browser
 	await browser.close();
+
+	return filename;
 };

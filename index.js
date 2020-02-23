@@ -1,11 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const uuidv4 = require('uuid/v4');
 
 const headlessVisit = require('./helpers/headless-visit');
-const {CARBON_URL, IMAGES_URL} = require('./helpers/globals');
+const {CARBON_URL, IMAGES_URL, PUBLIC_PATH} = require('./helpers/globals');
 
 const app = express();
-var port = process.env.PORT || 3000
+const port = process.env.PORT || 3000
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -13,10 +14,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 
 // Static assets
-app.use(express.static('public'));
-app.use('/public', express.static(__dirname + '/public'));
+app.use('/public', express.static(PUBLIC_PATH));
 
-app.post('/api', function (req, res) {
+app.post('/api', async (req, res) => {
     // TODO: validate pareters
     const lang = req.body.lang || 'auto'; // optional, default = auto
     const code = req.body.code;
@@ -24,13 +24,16 @@ app.post('/api', function (req, res) {
     // Fetch image
     const url = CARBON_URL + '?code=' + code + '&l=' + lang;
     console.log("URL", url);
+    
+    const filename = `${uuidv4()}.png`;    
     headlessVisit({
-        url,
-        IMAGES_URL
+        url: url,
+        location: PUBLIC_PATH,
+        filename: filename
     });
 
-    res.status(201).send({
-        image_url: IMAGES_URL + 'carbon.png'
+    res.status(201).json({
+        image_url: IMAGES_URL + filename
     });
 });
 
