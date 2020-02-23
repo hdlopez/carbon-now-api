@@ -1,7 +1,8 @@
 // Packages
 const puppeteer = require('puppeteer');
+const uuidv4 = require('uuid/v4');
 
-module.exports = async ({url, location = '/tmp', filename = 'carbon.png', type = 'png', headless = true, timeout = 2000}) => {
+module.exports = async ({url, location = '/tmp', type = 'png', headless = true, timeout = 2000}) => {
 	// Launch browser
 	const browser = await puppeteer.launch({ args: ['--no-sandbox'], headless: headless});
 	
@@ -19,6 +20,7 @@ module.exports = async ({url, location = '/tmp', filename = 'carbon.png', type =
 		waitUntil: 'load' // https://goo.gl/BdRVnv
 	});
 
+	const filename = `${uuidv4()}.png`;    
 	if (headless) {
 		// If `-h` set, simply screenshot the `#container` element
 		// This means no svg support or 4x resolution, but a functioning

@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const uuidv4 = require('uuid/v4');
 
 const headlessVisit = require('./helpers/headless-visit');
 const {CARBON_URL, IMAGES_URL, PUBLIC_PATH} = require('./helpers/globals');
@@ -25,11 +24,9 @@ app.post('/api', async (req, res) => {
     const url = CARBON_URL + '?code=' + code + '&l=' + lang;
     console.log("URL", url);
     
-    const filename = `${uuidv4()}.png`;    
-    headlessVisit({
+    const filename = await headlessVisit({
         url: url,
-        location: PUBLIC_PATH,
-        filename: filename
+        location: PUBLIC_PATH
     });
 
     res.status(201).json({
