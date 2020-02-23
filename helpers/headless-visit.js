@@ -1,11 +1,10 @@
 // Packages
-import { launch } from 'puppeteer';
+const puppeteer = require('puppeteer');
 
-export default async ({url, location = './public', type = 'png', headless = false, timeout = 2000}) => {
+module.exports = async ({url, location = './public', type = 'png', headless = true, timeout = 2000}) => {
 	// Launch browser
-	const browser = await launch({
-		headless
-	});
+	const browser = await puppeteer.launch({ args: ['--no-sandbox'], headless: headless});
+	
 	// Open new page
 	const page = await browser.newPage();
 	// Set viewport to something big
