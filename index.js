@@ -1,17 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+var cors = require('cors')
 
 const headlessVisit = require('./helpers/headless-visit');
 const {CARBON_URL, IMAGES_URL, PUBLIC_PATH} = require('./helpers/globals');
 
 const app = express();
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
-app.use(bodyParser.json())
-
+app.use(bodyParser.json());
+app.use(cors());
 // Static assets
 app.use('/public', express.static(PUBLIC_PATH));
 

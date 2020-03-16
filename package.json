@@ -19,6 +19,7 @@
   "homepage": "https://github.com/hdlopez/carbon-now-api#readme",
   "dependencies": {
     "body-parser": "1.19.0",
+    "cors": "^2.8.5",
     "express": "4.17.1",
     "puppeteer": "2.1.1",
     "uuid": "3.4.0"
