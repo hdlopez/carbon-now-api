@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-var cors = require('cors')
+var cors = require('cors');
 
 const headlessVisit = require('./helpers/headless-visit');
 const {CARBON_URL, IMAGES_URL, PUBLIC_PATH} = require('./helpers/globals');
@@ -29,6 +29,11 @@ app.post('/api', async (req, res) => {
         url: url,
         location: PUBLIC_PATH
     });
+
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
 
     res.status(201).json({
         image_url: IMAGES_URL + filename
